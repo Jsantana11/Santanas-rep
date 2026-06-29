@@ -4,10 +4,11 @@
 Beat the S&P 500 over the challenge window. Stocks only — no options, ever.
 
 ## Capital & Constraints
-- Starting capital: ~$10,000
-- Platform: Alpaca
-- Instruments: Stocks ONLY
-- PDT limit: 3 day trades per 5 rolling days (account < $25k)
+- Starting capital: ~$40
+- Platform: Robinhood (agentic account 504461419)
+- Instruments: Stocks ONLY — fractional shares via dollar_amount
+- Cash account: no PDT rule. T+1 settlement.
+- Max position size: ~$8 (20% of $40)
 
 ## Core Rules
 1. NO OPTIONS — ever
