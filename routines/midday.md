@@ -23,7 +23,9 @@ STEP 2 — Pull current state:
   mcp__Robinhood__get_equity_orders (account: 504461419)
   mcp__Robinhood__get_equity_quotes (symbols: [all held tickers])
 
-STEP 3 — Cut losers immediately. For every position where unrealized loss <= -7%:
+STEP 3 — Cut losers immediately. This is the ONLY stop loss mechanism since
+Robinhood doesn't support stop orders on fractional shares. For every position
+where unrealized loss <= -7%:
   mcp__Robinhood__place_equity_order (account: 504461419, symbol: SYM,
     side: "sell", type: "market", quantity: "all shares", time_in_force: "gfd")
   Cancel its stop order via mcp__Robinhood__cancel_equity_order.

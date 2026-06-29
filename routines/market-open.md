@@ -45,10 +45,11 @@ STEP 5 — Execute the buys:
   mcp__Robinhood__place_equity_order (account: 504461419, symbol: SYM,
     side: "buy", type: "market", dollar_amount: "X.XX", time_in_force: "gfd")
 
-STEP 6 — Place 10% stop for each new position:
-  mcp__Robinhood__place_equity_order (account: 504461419, symbol: SYM,
-    side: "sell", type: "stop_market", quantity: "shares_held",
-    stop_price: "entry_price * 0.90", time_in_force: "gtc")
+STEP 6 — Stop loss note:
+Robinhood does NOT support stop orders on fractional shares. Do NOT attempt
+to place a stop order — it will be rejected. Instead, log the stop level in
+Google Sheets and TRADE-LOG so the midday scan can enforce the -7% cut rule.
+Stop level = entry_price * 0.90. The midday routine is the safety net.
 
 STEP 7 — Log each trade to Google Sheets:
   bash scripts/sheets.sh append TRADE-LOG "$DATE" "SYM" "buy" "dollar_amount" "entry_price" "stop_price" "thesis" "target" "R:R"
