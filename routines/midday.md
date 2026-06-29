@@ -8,43 +8,41 @@ IMPORTANT — BROKER:
 - Agentic account number: 504461419
 - Never use alpaca.sh or any Alpaca API calls.
 
-IMPORTANT — PERSISTENCE:
-- Fresh clone. File changes VANISH unless committed and pushed.
-  MUST commit and push at STEP 8.
+IMPORTANT — MEMORY:
+- Google Sheets is the persistent memory. Use scripts/sheets.sh to read/write.
+- Read recent trades: bash scripts/sheets.sh read TRADE-LOG
+- Git push is best-effort — Sheets is the source of truth.
 
-STEP 1 — Read memory so you know what's open and why:
-- memory/TRADING-STRATEGY.md (exit rules)
-- tail of memory/TRADE-LOG.md (entries, original thesis per position, stops)
-- today's memory/RESEARCH-LOG.md entry
+STEP 1 — Read memory:
+  bash scripts/sheets.sh read TRADE-LOG       (entries, thesis per position, stops)
+  bash scripts/sheets.sh read RESEARCH-LOG    (today's research)
+  memory/TRADING-STRATEGY.md (exit rules)
 
 STEP 2 — Pull current state:
   mcp__Robinhood__get_equity_positions (account: 504461419)
   mcp__Robinhood__get_equity_orders (account: 504461419)
   mcp__Robinhood__get_equity_quotes (symbols: [all held tickers])
 
-STEP 3 — Cut losers immediately. For every position where
-unrealized loss <= -7%:
+STEP 3 — Cut losers immediately. For every position where unrealized loss <= -7%:
   mcp__Robinhood__place_equity_order (account: 504461419, symbol: SYM,
     side: "sell", type: "market", quantity: "all shares", time_in_force: "gfd")
-  Then cancel its stop order via mcp__Robinhood__cancel_equity_order.
-Log the exit to TRADE-LOG: exit price, realized P&L, "cut at -7% per rule".
+  Cancel its stop order via mcp__Robinhood__cancel_equity_order.
+  bash scripts/sheets.sh append TRADE-LOG "$DATE" "SYM" "sell" "" "exit_price" "" "cut at -7% per rule" "" "realized_pnl"
 
-STEP 4 — Tighten stops on winners. Cancel old stop, place new fixed stop:
-- Up >= +20% -> new stop at entry * 0.95 (5% trail equivalent)
-- Up >= +15% -> new stop at entry * 0.93 (7% trail equivalent)
+STEP 4 — Tighten stops on winners:
+- Up >= +20% -> new stop at entry * 0.95
+- Up >= +15% -> new stop at entry * 0.93
 Never tighten within 3% of current price. Never move a stop down.
 
-STEP 5 — Thesis check. If a thesis broke intraday, cut the position even
-if not at -7% yet. Document reasoning in TRADE-LOG.
+STEP 5 — Thesis check. Cut broken thesis positions. Log to Sheets.
 
-STEP 6 — Optional intraday research via Perplexity if something is moving
-sharply with no obvious cause. Append afternoon addendum to RESEARCH-LOG.
+STEP 6 — Optional Perplexity research if something moving sharply.
 
 STEP 7 — Notification: only if action was taken.
   bash scripts/clickup.sh "<action summary>"
 
-STEP 8 — COMMIT AND PUSH (if any memory files changed):
+STEP 8 — Attempt git commit and push (best effort):
   git add memory/TRADE-LOG.md memory/RESEARCH-LOG.md
   git commit -m "midday scan $DATE"
   git push origin HEAD
-Skip commit if no-op. If push fails, continue — Robinhood holds the source of truth.
+If push fails, continue — Sheets has the data.

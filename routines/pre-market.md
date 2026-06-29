@@ -9,21 +9,22 @@ IMPORTANT — BROKER:
 - You trade on Robinhood via the Robinhood MCP tools (mcp__Robinhood__*).
 - Agentic account number: 504461419
 - Never use alpaca.sh or any Alpaca API calls.
-- For market data: use mcp__Robinhood__get_equity_quotes and mcp__Robinhood__get_equity_fundamentals.
+
+IMPORTANT — MEMORY:
+- Google Sheets is the persistent memory. Use scripts/sheets.sh to read/write.
+- Read recent history: bash scripts/sheets.sh read TRADE-LOG
+- Read recent research: bash scripts/sheets.sh read RESEARCH-LOG
+- Git push is best-effort — Sheets is the source of truth.
 
 IMPORTANT — ENVIRONMENT VARIABLES:
-- PERPLEXITY_API_KEY must be set for research calls.
-- There is NO .env file in this repo and you MUST NOT create, write, or source one.
+- PERPLEXITY_API_KEY, GOOGLE_SHEETS_ID, GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY must be set.
+- There is NO .env file — never create one.
 - If PERPLEXITY_API_KEY is missing, fall back to native WebSearch.
 
-IMPORTANT — PERSISTENCE:
-- Fresh clone. File changes VANISH unless committed and pushed.
-  MUST commit and push at STEP 6.
-
 STEP 1 — Read memory for context:
-- memory/TRADING-STRATEGY.md
-- tail of memory/TRADE-LOG.md
-- tail of memory/RESEARCH-LOG.md
+  bash scripts/sheets.sh read TRADE-LOG       (last 10 rows = recent trades)
+  bash scripts/sheets.sh read RESEARCH-LOG    (last 3 rows = recent research)
+  memory/TRADING-STRATEGY.md
 
 STEP 2 — Pull live account state via Robinhood MCP:
   mcp__Robinhood__get_portfolio (account: 504461419)
@@ -43,24 +44,25 @@ STEP 3 — Research market context via Perplexity:
   - News on any currently-held ticker via mcp__Robinhood__search
   - If politician trades reveal a strong consensus buy in a sector, flag as a trade idea
 
-If Perplexity exits 3, fall back to native WebSearch and note the
-fallback in the log entry.
+If Perplexity exits 3, fall back to native WebSearch.
 
-STEP 4 — Write a dated entry to memory/RESEARCH-LOG.md:
+STEP 4 — Append research summary to Google Sheets:
+  bash scripts/sheets.sh append RESEARCH-LOG "$DATE" "<market summary>" "<2-3 trade ideas with catalyst>"
 - Account snapshot (equity, cash, buying power)
 - Market context (oil, indices, VIX, today's releases)
-- Politician trades: any notable Congress disclosures this week
-- 2-3 actionable trade ideas WITH catalyst + entry/stop/target (politician buys count as a catalyst)
-- Note: with ~$40 capital, only fractional shares. Position size ~$6-8 each.
-- Risk factors for the day
-- Decision: trade or HOLD (default HOLD — patience > activity)
+- Politician trades: any notable Congress disclosures
+- 2-3 actionable trade ideas WITH catalyst + entry/stop/target
+- Position size ~$6-8 each (fractional shares)
+- Decision: trade or HOLD (default HOLD)
 
-STEP 5 — Notification: silent unless urgent.
+STEP 5 — Also write to memory/RESEARCH-LOG.md for local reference:
+  Append full dated entry matching existing format.
+
+STEP 6 — Notification: silent unless urgent.
   bash scripts/clickup.sh "<one line>"
 
-STEP 6 — COMMIT AND PUSH (mandatory):
+STEP 7 — Attempt git commit and push (best effort):
   git add memory/RESEARCH-LOG.md
   git commit -m "pre-market research $DATE"
   git push origin HEAD
-On push failure: git pull --rebase origin main, then push again.
-Never force-push.
+If push fails, continue — Google Sheets has the data.

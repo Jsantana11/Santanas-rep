@@ -9,56 +9,57 @@ IMPORTANT — BROKER:
 - Never use alpaca.sh or any Alpaca API calls.
 - Account has ~$40 total. Use dollar_amount for fractional share orders.
 
-IMPORTANT — ENVIRONMENT VARIABLES:
-- PERPLEXITY_API_KEY must be set. No .env file — never create one.
+IMPORTANT — MEMORY:
+- Google Sheets is the persistent memory. Use scripts/sheets.sh to read/write.
+- Read today's research: bash scripts/sheets.sh read RESEARCH-LOG
+- Read recent trades: bash scripts/sheets.sh read TRADE-LOG
+- Git push is best-effort — Sheets is the source of truth.
 
-IMPORTANT — PERSISTENCE:
-- Fresh clone. File changes VANISH unless committed and pushed.
-  MUST commit and push at STEP 8.
+IMPORTANT — ENVIRONMENT VARIABLES:
+- PERPLEXITY_API_KEY, GOOGLE_SHEETS_ID, GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY must be set.
+- No .env file — never create one.
 
 STEP 1 — Read memory for today's plan:
-- memory/TRADING-STRATEGY.md
-- TODAY's entry in memory/RESEARCH-LOG.md (if missing, run pre-market
-  STEPS 1-3 inline)
-- tail of memory/TRADE-LOG.md (for weekly trade count)
+  bash scripts/sheets.sh read RESEARCH-LOG    (find today's entry for trade ideas)
+  bash scripts/sheets.sh read TRADE-LOG       (count trades this week for 3/week cap)
+  memory/TRADING-STRATEGY.md
+
+If today's research is missing from Sheets, run pre-market STEPS 1-3 inline.
 
 STEP 2 — Re-validate with live data:
   mcp__Robinhood__get_portfolio (account: 504461419)
   mcp__Robinhood__get_equity_positions (account: 504461419)
   mcp__Robinhood__get_equity_quotes (symbols: [each planned ticker])
 
-STEP 3 — Hard-check rules BEFORE every order. Skip any trade that fails
-and log the reason:
+STEP 3 — Hard-check rules BEFORE every order. Skip any trade that fails:
 - Total positions after trade <= 6
-- Trades this week <= 3
-- Position cost <= 20% of equity (~$8 max per position)
+- Trades this week <= 3 (count from TRADE-LOG sheet)
+- Position cost <= 20% of equity (~$8 max)
 - Catalyst documented in today's RESEARCH-LOG
-- Cash account: no PDT rule applies (cash settles T+1)
+- Cash account: no PDT rule
 
 STEP 4 — Review order before placing:
   mcp__Robinhood__review_equity_order for each planned trade.
-  Check estimated cost and any alerts. Only proceed if review passes.
 
-STEP 5 — Execute the buys (market orders, dollar amounts for fractional):
+STEP 5 — Execute the buys:
   mcp__Robinhood__place_equity_order (account: 504461419, symbol: SYM,
     side: "buy", type: "market", dollar_amount: "X.XX", time_in_force: "gfd")
-Wait for confirmation before placing the stop.
 
-STEP 6 — Immediately place 10% trailing stop GTC for each new position:
+STEP 6 — Place 10% stop for each new position:
   mcp__Robinhood__place_equity_order (account: 504461419, symbol: SYM,
     side: "sell", type: "stop_market", quantity: "shares_held",
     stop_price: "entry_price * 0.90", time_in_force: "gtc")
-Note: Robinhood cash accounts may not support trailing stops — use fixed
-stop at 10% below entry. If rejected, log as "stop pending manual set".
 
-STEP 7 — Append each trade to memory/TRADE-LOG.md (matching existing format):
-Date, ticker, side, dollar amount, entry price, stop level, thesis, target, R:R.
+STEP 7 — Log each trade to Google Sheets:
+  bash scripts/sheets.sh append TRADE-LOG "$DATE" "SYM" "buy" "dollar_amount" "entry_price" "stop_price" "thesis" "target" "R:R"
 
-STEP 8 — Notification: only if a trade was placed.
+STEP 8 — Also append to memory/TRADE-LOG.md for local reference.
+
+STEP 9 — Notification: only if a trade was placed.
   bash scripts/clickup.sh "<tickers, dollar amounts, fill prices, one-line why>"
 
-STEP 9 — COMMIT AND PUSH (mandatory if any trades executed):
+STEP 10 — Attempt git commit and push (best effort):
   git add memory/TRADE-LOG.md
   git commit -m "market-open trades $DATE"
   git push origin HEAD
-Skip commit if no trades fired. If push fails, continue — Robinhood holds the source of truth.
+Skip commit if no trades fired. If push fails, continue — Sheets has the data.
