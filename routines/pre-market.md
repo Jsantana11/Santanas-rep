@@ -38,7 +38,10 @@ STEP 3 — Research market context via Perplexity:
   bash scripts/perplexity.sh "Earnings reports today before market open"
   bash scripts/perplexity.sh "Economic calendar today CPI PPI FOMC jobs data"
   bash scripts/perplexity.sh "S&P 500 sector momentum YTD"
+  bash scripts/perplexity.sh "Congress politician stock trades disclosed past 7 days STOCK Act"
+  bash scripts/perplexity.sh "Senator Representative stock purchases sells disclosed $DATE"
   - News on any currently-held ticker via mcp__Robinhood__search
+  - If politician trades reveal a strong consensus buy in a sector, flag as a trade idea
 
 If Perplexity exits 3, fall back to native WebSearch and note the
 fallback in the log entry.
@@ -46,7 +49,8 @@ fallback in the log entry.
 STEP 4 — Write a dated entry to memory/RESEARCH-LOG.md:
 - Account snapshot (equity, cash, buying power)
 - Market context (oil, indices, VIX, today's releases)
-- 2-3 actionable trade ideas WITH catalyst + entry/stop/target
+- Politician trades: any notable Congress disclosures this week
+- 2-3 actionable trade ideas WITH catalyst + entry/stop/target (politician buys count as a catalyst)
 - Note: with ~$40 capital, only fractional shares. Position size ~$6-8 each.
 - Risk factors for the day
 - Decision: trade or HOLD (default HOLD — patience > activity)
