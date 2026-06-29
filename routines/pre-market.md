@@ -61,6 +61,6 @@ STEP 5 — Notification: silent unless urgent.
 STEP 6 — COMMIT AND PUSH (mandatory):
   git add memory/RESEARCH-LOG.md
   git commit -m "pre-market research $DATE"
-  git push origin main
+  git push origin HEAD
 On push failure: git pull --rebase origin main, then push again.
 Never force-push.
