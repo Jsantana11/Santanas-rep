@@ -47,4 +47,4 @@ STEP 8 — COMMIT AND PUSH (if any memory files changed):
   git add memory/TRADE-LOG.md memory/RESEARCH-LOG.md
   git commit -m "midday scan $DATE"
   git push origin HEAD
-Skip commit if no-op. On push failure: rebase and retry.
+Skip commit if no-op. If push fails, continue — Robinhood holds the source of truth.

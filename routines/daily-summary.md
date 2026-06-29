@@ -50,4 +50,4 @@ STEP 6 — COMMIT AND PUSH (mandatory):
   git add memory/TRADE-LOG.md
   git commit -m "EOD snapshot $DATE"
   git push origin HEAD
-On push failure: rebase and retry.
+If push fails, continue — Robinhood holds the source of truth.
