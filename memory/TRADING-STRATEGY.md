@@ -90,6 +90,22 @@ Beat the S&P 500 over the challenge window. Stocks only — no options, ever.
 - Specific catalyst documented in today's RESEARCH-LOG
 - Instrument is a stock (not an option)
 
+## Add-to-Winner Rule (pyramiding)
+Adding to an EXISTING position is only allowed when ALL of the following
+hold — never add just because a position happens to be green:
+- A NEW catalyst (per Research Standard) has emerged since entry that
+  independently reinforces the same thesis. The original entry catalyst
+  having "worked so far" is NOT itself a new catalyst.
+- Position is currently profitable (not breakeven/down) — never add to a
+  loser; that is averaging down, which is banned.
+- Total position size after adding still <= 20% of equity (the cap
+  applies to the combined position, not per-fill).
+- Counts against the same week's trade cap as any other buy.
+- Document the new catalyst in RESEARCH-LOG same as a fresh idea — log it
+  as "<TICKER> add" not a new entry.
+If any condition fails, leave the position alone — let the existing
+trailing-stop/take-profit rules manage it as-is.
+
 ## Sell-Side Rules
 - Unrealized loss <= -7%: close immediately
 - Thesis broken (catalyst invalid, sector rolling over): close regardless of P&L

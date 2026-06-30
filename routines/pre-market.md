@@ -43,6 +43,11 @@ STEP 3 — Research market context via Perplexity:
   bash scripts/perplexity.sh "Senator Representative stock purchases sells disclosed $DATE"
   - News on any currently-held ticker via mcp__Robinhood__search
   - If politician trades reveal a strong consensus buy in a sector, flag as a trade idea
+  - For each currently-held position that is profitable: check for a NEW
+    catalyst (since entry) reinforcing the same thesis. If found, evaluate
+    against the Add-to-Winner Rule in memory/TRADING-STRATEGY.md — this is
+    the only path to legitimately adding to an existing position. A
+    position simply being green is NOT itself a reason to add.
 
 If Perplexity exits 3, fall back to native WebSearch.
 
