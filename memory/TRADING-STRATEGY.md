@@ -43,6 +43,23 @@ Beat the S&P 500 over the challenge window. Stocks only — no options, ever.
   should replace the entry-relative cut — do not change this without
   explicit user approval.
 
+## Research Standard — Facts Over Hype
+- A "catalyst" must be a verifiable fact: an earnings number, a confirmed
+  contract/deal, an FDA/regulatory decision, an economic data print, a
+  confirmed analyst rating change, a confirmed Congress trade disclosure,
+  etc. — something that already happened or is officially scheduled.
+- Reject speculation, rumor, "could," "might," social-media hype, or
+  unconfirmed reports as a catalyst. If the only source is sentiment or
+  a single unverified post, it does not qualify — note it as noise, not
+  an idea.
+- Prefer catalysts confirmed by 2+ independent sources when available.
+- Logic check before any trade idea: does the catalyst plausibly justify
+  the expected price move, given the company/sector fundamentals? A
+  catalyst with no logical mechanism to move the stock (e.g. unrelated
+  news, stale information already priced in) does not qualify.
+- When research is ambiguous or thin, default to HOLD — do not invent a
+  trade idea to fill the "2-3 ideas" quota.
+
 ## Core Rules
 1. NO OPTIONS — ever
 2. 75-85% deployed

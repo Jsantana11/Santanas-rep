@@ -46,6 +46,13 @@ STEP 3 — Research market context via Perplexity:
 
 If Perplexity exits 3, fall back to native WebSearch.
 
+Apply the Research Standard in memory/TRADING-STRATEGY.md to everything
+above: only verifiable facts (earnings, confirmed deals/contracts,
+regulatory decisions, scheduled economic data, confirmed Congress trades)
+count as catalysts. Discard rumor, hype, and unconfirmed reports — log
+them as noise, not as trade ideas. If nothing solid turns up, the
+decision is HOLD.
+
 STEP 4 — Append research summary to Google Sheets. This is a REQUIRED, MUST-RUN
 step every single run — do not skip it even if no trade ideas stand out.
 Build exactly ONE bash command with exactly 3 quoted args after RESEARCH-LOG:

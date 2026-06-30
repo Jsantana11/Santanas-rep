@@ -34,6 +34,11 @@ STEP 3 — Scan for fresh news/catalysts since the last check:
   - News on any currently-held ticker via mcp__Robinhood__search
 If Perplexity exits 3, fall back to native WebSearch.
 
+Apply the Research Standard in memory/TRADING-STRATEGY.md: only verifiable
+facts count as catalysts (confirmed earnings/deals/regulatory decisions/
+data prints), never rumor or hype. If the only thing moving a stock is
+speculation, it does not qualify — log as noise, not as a finding.
+
 STEP 4 — Decide:
 - If nothing new/actionable: log nothing extra, exit quietly (no Sheets write needed).
 - If a genuinely strong NEW catalyst appears for a ticker not already
