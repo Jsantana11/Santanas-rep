@@ -46,14 +46,22 @@ STEP 3 — Research market context via Perplexity:
 
 If Perplexity exits 3, fall back to native WebSearch.
 
-STEP 4 — Append research summary to Google Sheets:
-  bash scripts/sheets.sh append RESEARCH-LOG "$DATE" "<market summary>" "<2-3 trade ideas with catalyst>"
-- Account snapshot (equity, cash, buying power)
-- Market context (oil, indices, VIX, today's releases)
-- Politician trades: any notable Congress disclosures
-- 2-3 actionable trade ideas WITH catalyst + entry/stop/target
-- Position size ~$6-8 each (fractional shares)
-- Decision: trade or HOLD (default HOLD)
+STEP 4 — Append research summary to Google Sheets. This is a REQUIRED, MUST-RUN
+step every single run — do not skip it even if no trade ideas stand out.
+Build exactly ONE bash command with exactly 3 quoted args after RESEARCH-LOG:
+  arg1 = "$DATE"
+  arg2 = one-paragraph market summary (account snapshot, oil/indices/VIX,
+         today's catalysts, politician trades) — plain text, NO embedded
+         double-quotes, NO newlines, keep it to a few sentences
+  arg3 = 2-3 trade ideas with catalyst + entry/stop/target + position size,
+         OR "HOLD - <reason>" if no trade — plain text, NO embedded
+         double-quotes, NO newlines
+
+  bash scripts/sheets.sh append RESEARCH-LOG "$DATE" "Account: $X equity, $X cash. Oil $X, S&P futures X, VIX X. Catalysts: ..." "1) SYM buy $X catalyst entry/stop/target 2) ... or HOLD - reason"
+
+Run the command and check its output. If it does NOT print
+"Appended to RESEARCH-LOG", the write failed — read the printed error,
+fix the issue (usually quoting), and retry once before moving on.
 
 STEP 5 — Also write to memory/RESEARCH-LOG.md for local reference:
   Append full dated entry matching existing format.

@@ -28,8 +28,10 @@ STEP 3 — Compute metrics:
 - Trades today (list or "none")
 - Trades this week (running total)
 
-STEP 4 — Append EOD snapshot to Google Sheets:
-  bash scripts/sheets.sh append TRADE-LOG "$DATE" "EOD" "" "today_equity" "" "" "Day P&L: X% | Phase P&L: X% | Trades: N" "" ""
+STEP 4 — Append EOD snapshot to Google Sheets. Leave Dollar Amount/Entry/Stop
+blank — those columns are for actual trade sizes, not portfolio totals.
+Put the equity figure in the Thesis/notes column instead:
+  bash scripts/sheets.sh append TRADE-LOG "$DATE" "EOD" "" "" "" "" "Equity: \$today_equity | Day P&L: X% | Phase P&L: X% | Trades: N" "" ""
 
 STEP 5 — Also append EOD snapshot to memory/TRADE-LOG.md:
 ### MMM DD — EOD Snapshot

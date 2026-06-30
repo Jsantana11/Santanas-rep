@@ -73,21 +73,34 @@ args = sys.argv[1:]
 print(json.dumps({'values': [args]}))
 " "$@")
 
-  curl -s -X POST \
+  HTTP_CODE=$(curl -s -o /tmp/sheets_append_resp.json -w "%{http_code}" -X POST \
     "https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS" \
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
-    -d "$VALUES" > /dev/null
+    -d "$VALUES")
+
+  if [[ "$HTTP_CODE" != "200" ]]; then
+    echo "ERROR: append to ${SHEET_NAME} failed (HTTP ${HTTP_CODE})" >&2
+    cat /tmp/sheets_append_resp.json >&2
+    exit 1
+  fi
 
   echo "Appended to ${SHEET_NAME}"
 
 elif [[ "$ACTION" == "read" ]]; then
-  curl -s \
+  HTTP_CODE=$(curl -s -o /tmp/sheets_read_resp.json -w "%{http_code}" \
     "https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}" \
-    -H "Authorization: Bearer ${TOKEN}" \
-    | python3 -c "
+    -H "Authorization: Bearer ${TOKEN}")
+
+  if [[ "$HTTP_CODE" != "200" ]]; then
+    echo "ERROR: read ${SHEET_NAME} failed (HTTP ${HTTP_CODE})" >&2
+    cat /tmp/sheets_read_resp.json >&2
+    exit 1
+  fi
+
+  python3 -c "
 import sys, json
-data = json.load(sys.stdin)
+data = json.load(open('/tmp/sheets_read_resp.json'))
 rows = data.get('values', [])
 for row in rows:
     print('\t'.join(row))
