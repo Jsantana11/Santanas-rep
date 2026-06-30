@@ -11,3 +11,8 @@ No positions yet. Bot launches with $40 starting capital on Robinhood.
 
 ## 2026-06-29 — GE buy
 **Symbol:** GE | **Side:** buy | **Dollar Amount:** $8.00 | **Fill Price:** $372.9999 | **Quantity:** 0.021447 shares | **Placed by:** agentic
+
+## 2026-06-30 — EOD Snapshot
+**Portfolio:** $50.00 | **Cash:** $42.00 (84%) | **Day P&L:** -$0.01 (-0.03%) | **Phase P&L:** ~$0.00 (flat)
+
+Positions: GE 0.021447 sh @ avg $373.01, last $373.39 (unrealized +$0.01). No open/GTC stop (fractional shares, Tier 1 — -7% manual cut is sole stop). Trades today: 0 | Trades this week: 1 (GE buy 6/29). Cash +$10 vs post-buy balance — assumed biweekly deposit, not logged here; verify against Sheets.
