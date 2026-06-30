@@ -7,7 +7,10 @@ IMPORTANT — BROKER:
 - You trade on Robinhood via the Robinhood MCP tools (mcp__Robinhood__*).
 - Agentic account number: 504461419
 - Never use alpaca.sh or any Alpaca API calls.
-- Account has ~$40 total. Use dollar_amount for fractional share orders.
+- Account size grows over time (~$50 added every 2 weeks). Always check
+  live equity via get_portfolio — never assume a fixed dollar figure.
+- Follow memory/TRADING-STRATEGY.md "Capital Tiers" for position sizing
+  and whether to use fractional (dollar_amount) or whole-share orders.
 
 IMPORTANT — MEMORY:
 - Google Sheets is the persistent memory. Use scripts/sheets.sh to read/write.
@@ -34,7 +37,7 @@ STEP 2 — Re-validate with live data:
 STEP 3 — Hard-check rules BEFORE every order. Skip any trade that fails:
 - Total positions after trade <= 6
 - Trades this week <= 3 (count from TRADE-LOG sheet)
-- Position cost <= 20% of equity (~$8 max)
+- Position cost <= 20% of current live equity (check get_portfolio; do not assume a fixed dollar cap)
 - Catalyst documented in today's RESEARCH-LOG
 - Cash account: no PDT rule
 
