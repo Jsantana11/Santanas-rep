@@ -31,32 +31,37 @@ STEP 2 — Pull live account state via Robinhood MCP:
   mcp__Robinhood__get_equity_positions (account: 504461419)
   mcp__Robinhood__get_equity_orders (account: 504461419)
 
-STEP 3 — Research market context via Perplexity:
-  bash scripts/perplexity.sh "WTI and Brent oil price right now"
-  bash scripts/perplexity.sh "S&P 500 futures premarket today"
-  bash scripts/perplexity.sh "VIX level today"
-  bash scripts/perplexity.sh "Top stock market catalysts today $DATE"
-  bash scripts/perplexity.sh "Earnings reports today before market open"
-  bash scripts/perplexity.sh "Economic calendar today CPI PPI FOMC jobs data"
-  bash scripts/perplexity.sh "S&P 500 sector momentum YTD"
+STEP 3 — Research: macro context first, then active stock ideas.
+
+Macro (2-3 queries max, just for context):
+  bash scripts/perplexity.sh "S&P 500 futures premarket $DATE"
+  bash scripts/perplexity.sh "VIX level and market sentiment today $DATE"
+  bash scripts/perplexity.sh "Economic releases today CPI PPI FOMC jobs $DATE"
+
+Stock ideas (run ALL of these — this is the core of the research):
+  bash scripts/perplexity.sh "Best stocks to buy today based on news and momentum $DATE"
+  bash scripts/perplexity.sh "Stocks with earnings beats or guidance raises today $DATE"
+  bash scripts/perplexity.sh "Stocks with unusual volume or breakout today $DATE"
+  bash scripts/perplexity.sh "Top momentum stocks S&P 500 this week $DATE"
+  bash scripts/perplexity.sh "Stocks with analyst upgrades or price target raises today $DATE"
   bash scripts/perplexity.sh "Congress politician stock trades disclosed past 7 days STOCK Act"
-  bash scripts/perplexity.sh "Senator Representative stock purchases sells disclosed $DATE"
-  - News on any currently-held ticker via mcp__Robinhood__search
-  - If politician trades reveal a strong consensus buy in a sector, flag as a trade idea
-  - For each currently-held position that is profitable: check for a NEW
-    catalyst (since entry) reinforcing the same thesis. If found, evaluate
-    against the Add-to-Winner Rule in memory/TRADING-STRATEGY.md — this is
-    the only path to legitimately adding to an existing position. A
-    position simply being green is NOT itself a reason to add.
+  - Check held tickers for fresh news: mcp__Robinhood__search for each symbol
+  - For each held position: check for new catalyst to add per Add-to-Winner
+    Rule in memory/TRADING-STRATEGY.md
 
 If Perplexity exits 3, fall back to native WebSearch.
 
-Apply the Research Standard in memory/TRADING-STRATEGY.md to everything
-above: only verifiable facts (earnings, confirmed deals/contracts,
-regulatory decisions, scheduled economic data, confirmed Congress trades)
-count as catalysts. Discard rumor, hype, and unconfirmed reports — log
-them as noise, not as trade ideas. If nothing solid turns up, the
-decision is HOLD.
+Apply the Research Standard in memory/TRADING-STRATEGY.md:
+- Catalyst must have a logical reason to move the stock — earnings beat,
+  confirmed upgrade, confirmed contract, data print, congressional buy.
+- Discard pure rumor or single unverified source with no corroboration.
+- BUT: analyst upgrades, volume breakouts, momentum from multiple sources,
+  and earnings beats ARE valid catalysts even if not "official" government
+  data. Use judgment — if 2+ credible sources point the same direction,
+  that is enough to flag as an idea.
+- The default is NOT automatically HOLD — if 2-3 solid ideas emerge,
+  flag them all. Only default to HOLD when research genuinely turns up
+  nothing with a logical upside case.
 
 STEP 4 — Append research summary to Google Sheets. This is a REQUIRED, MUST-RUN
 step every single run — do not skip it even if no trade ideas stand out.
