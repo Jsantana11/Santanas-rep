@@ -36,10 +36,15 @@ STEP 2 — Re-validate with live data:
 
 STEP 3 — Hard-check rules BEFORE every order. Skip any trade that fails:
 - Total positions after trade <= 6
-- Trades this week <= 3 (count from TRADE-LOG sheet)
-- Position cost <= 20% of current live equity (check get_portfolio; do not assume a fixed dollar cap)
-- Catalyst documented in today's RESEARCH-LOG
+- Trades this week <= cap for current Capital Tier (TRADING-STRATEGY.md)
+- Position cost <= 20% of current live equity (check get_portfolio)
+- Catalyst or momentum driver documented in today's RESEARCH-LOG
 - Cash account: no PDT rule
+
+CASH DEPLOYMENT CHECK: if cash > 25% of equity after all planned trades
+and positions < 5, go back to RESEARCH-LOG and find the next best idea
+to deploy into — do not leave excess cash sitting idle without a documented
+specific reason (sector blackout, no qualifying catalyst, etc.).
 
 STEP 4 — Review order before placing:
   mcp__Robinhood__review_equity_order for each planned trade.

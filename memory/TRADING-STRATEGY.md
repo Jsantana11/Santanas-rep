@@ -64,7 +64,9 @@ Beat the S&P 500 over the challenge window. Stocks only — no options, ever.
 
 ## Core Rules
 1. NO OPTIONS — ever
-2. 75-85% deployed
+2. Target 75-85% deployed AT ALL TIMES — sitting on cash is a loss of
+   opportunity. If cash exceeds 25% of equity and positions < 5, the bot
+   MUST find a trade or explain specifically why nothing qualifies.
 3. 5-6 positions at a time, max 20% each
 4. Real GTC trailing stop only when whole shares allow it (see Capital
    Tiers); otherwise the scheduled -7% check is the stop mechanism
@@ -75,21 +77,23 @@ Beat the S&P 500 over the challenge window. Stocks only — no options, ever.
 8. Max new trades/week per current Capital Tier (see above)
 9. Follow sector momentum
 10. Exit a sector after 2 consecutive failed trades
-11. Patience > activity
+11. Aggressive deployment > sitting on cash
 
 ## Entry Checklist
-- Specific catalyst?
-- Sector in momentum?
-- Stop level (7-10% below entry)
-- Target (min 2:1 R:R)
+- Specific catalyst or momentum driver?
+- Sector not in a 2-consecutive-fail blackout?
+- Stop level (7% below entry)
+- Target (min 1.5:1 R:R — lowered from 2:1 to allow more entries)
 
 ## Buy-Side Gate (all must pass before any buy)
 - Total positions after fill <= 6
-- Trades this week <= 3
+- Trades this week <= cap for current Capital Tier
 - Position cost <= 20% of equity
 - Position cost <= available cash
-- daytrade_count < 3 (PDT rule)
-- Specific catalyst documented in today's RESEARCH-LOG
+- Specific catalyst or momentum driver documented in today's RESEARCH-LOG
+- CASH DEPLOYMENT CHECK: if cash > 25% of equity and no trade fires today,
+  log a specific reason why (e.g. "no qualifying catalyst" or "sector
+  blackout") — a blank HOLD with no explanation is not acceptable
 - Instrument is a stock (not an option)
 
 ## Add-to-Winner Rule (pyramiding)
