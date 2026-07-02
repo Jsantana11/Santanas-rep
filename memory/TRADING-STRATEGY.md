@@ -96,8 +96,9 @@ hold — never add just because a position happens to be green:
 - A NEW catalyst (per Research Standard) has emerged since entry that
   independently reinforces the same thesis. The original entry catalyst
   having "worked so far" is NOT itself a new catalyst.
-- Position is currently profitable (not breakeven/down) — never add to a
-  loser; that is averaging down, which is banned.
+- Position is NOT down -7% or more — never add to a position already at
+  the cut threshold. Flat or slightly negative is acceptable if the
+  thesis is still intact and a fresh catalyst exists.
 - Total position size after adding still <= 20% of equity (the cap
   applies to the combined position, not per-fill).
 - Counts against the same week's trade cap as any other buy.
