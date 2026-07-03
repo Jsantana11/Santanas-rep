@@ -51,17 +51,18 @@ Stock ideas (run ALL of these — this is the core of the research):
 
 If Perplexity exits 3, fall back to native WebSearch.
 
-Apply the Research Standard in memory/TRADING-STRATEGY.md:
-- Catalyst must have a logical reason to move the stock — earnings beat,
-  confirmed upgrade, confirmed contract, data print, congressional buy.
-- Discard pure rumor or single unverified source with no corroboration.
-- BUT: analyst upgrades, volume breakouts, momentum from multiple sources,
-  and earnings beats ARE valid catalysts even if not "official" government
-  data. Use judgment — if 2+ credible sources point the same direction,
-  that is enough to flag as an idea.
-- The default is NOT automatically HOLD — if 2-3 solid ideas emerge,
-  flag them all. Only default to HOLD when research genuinely turns up
-  nothing with a logical upside case.
+GOAL: find 2-3 trades EVERY day. HOLD is a last resort, not a default.
+
+Research filter (keep it simple):
+- Does this stock have upside momentum, a news driver, or a sector tailwind?
+- Is the story believable and not already fully priced in?
+- If yes to both — it's a trade idea. Flag it.
+- Only skip if the stock is clearly in a downtrend with no catalyst at all.
+
+Every run MUST produce at least 2 trade ideas unless the market is closed
+or all 6 position slots are full. If research turns up nothing obvious,
+pick the 2 strongest momentum stocks from the queries above and flag them.
+Action beats inaction.
 
 STEP 4 — Append research summary to Google Sheets. This is a REQUIRED, MUST-RUN
 step every single run — do not skip it even if no trade ideas stand out.

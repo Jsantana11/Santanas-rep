@@ -34,17 +34,20 @@ STEP 2 — Re-validate with live data:
   mcp__Robinhood__get_equity_positions (account: 504461419)
   mcp__Robinhood__get_equity_quotes (symbols: [each planned ticker])
 
-STEP 3 — Hard-check rules BEFORE every order. Skip any trade that fails:
-- Total positions after trade <= 6
-- Trades this week <= cap for current Capital Tier (TRADING-STRATEGY.md)
-- Position cost <= 20% of current live equity (check get_portfolio)
-- Catalyst or momentum driver documented in today's RESEARCH-LOG
-- Cash account: no PDT rule
+STEP 3 — BIAS TOWARD ACTION. Execute every trade idea from RESEARCH-LOG
+unless one of these hard blockers applies:
+- Positions already at 6 (no room)
+- Trades this week already at the Capital Tier cap
+- Not enough cash to cover the position size
+- Stock is clearly in a sharp downtrend with zero catalyst
 
-CASH DEPLOYMENT CHECK: if cash > 25% of equity after all planned trades
-and positions < 5, go back to RESEARCH-LOG and find the next best idea
-to deploy into — do not leave excess cash sitting idle without a documented
-specific reason (sector blackout, no qualifying catalyst, etc.).
+If none of those blockers apply — PLACE THE ORDER. Do not hesitate, do
+not add extra filters, do not default to HOLD out of caution. The
+research already cleared the bar; trust it and execute.
+
+CASH DEPLOYMENT: after executing, if cash still > 25% of equity and
+positions < 6, find one more idea and buy it. Keep deploying until cash
+drops below 25% or position slots are full.
 
 STEP 4 — Review order before placing:
   mcp__Robinhood__review_equity_order for each planned trade.
