@@ -17,6 +17,7 @@ No positions yet. Bot launches with $40 starting capital on Robinhood.
 
 - Trades today: 2 — AMD buy $8.00 @ $519.90, TSM buy $8.00 @ $408.96
 - Trades this week: 2
-- Open positions: AMD -3.2% unrealized (avg $519.92, last $503.42, stop target $483.51 — **no GTC stop order placed**); TSM -1.6% unrealized (avg $408.98, last $402.54, stop target $380.34 — **no GTC stop order placed**)
-- ⚠️ Day/Phase P&L baseline is last-known equity ($49.30, pre-open 2026-07-17 — no EOD logged 7/16 or 7/17). The ~$19.62 jump far exceeds the $16 deployed into today's two trades; likely an untracked deposit, unverified against a real EOD close.
-- ⚠️ Rule violation: neither AMD nor TSM has a real GTC trailing-stop order on the books despite same-day fills (strategy requires one on every position).
+- Open positions: AMD -3.2% unrealized (avg $519.92, last $503.42, stop target $483.51); TSM -1.6% unrealized (avg $408.98, last $402.54, stop target $380.34)
+- CORRECTION (prior EOD note wrongly called this a rule violation): fractional-share positions at Capital Tier 1 (<$150 equity) cannot carry a real broker-side GTC stop on Robinhood — per TRADING-STRATEGY.md, the scheduled -7% check (market-open/midday/daily-summary) IS the designed stop mechanism at this tier. No action needed; not a bug.
+- Day/Phase P&L baseline is last-known equity ($49.30, pre-open 2026-07-17 — no EOD logged 7/16 or 7/17). The $53.30 cash today vs. expected ~$33.30 ($49.30 - $16 deployed) is a clean +$20.00 gap — consistent with TRADING-STRATEGY.md's "~$50 deposits every 2 weeks" model, so likely a deposit landed, not a data error. Unconfirmed (no transfer/deposit tool available) — awaiting user confirmation of deposit amount.
+- If the $20 deposit is confirmed: true trading Day P&L = 68.92 - 20.00 - 49.30 = **-$0.38 (-0.77%)**, consistent with both positions being red today. Cumulative Phase P&L should be tracked against total capital contributed (not a flat $40) going forward once deposit history is confirmed — the historical "equity - $40" Phase P&L figure likely overstates returns if earlier deposits also went untracked.
