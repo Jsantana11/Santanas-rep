@@ -1,19 +1,26 @@
 # Trading Bot
 
 Autonomous swing trading bot running on Claude Code cloud routines.
-Trades stocks only on Alpaca. No options, ever.
+Trades stocks only on Robinhood (agentic account 504461419). No options,
+ever.
 
 ## Quick Start
 
-1. Copy `env.template` to `.env` and fill in credentials
+1. Copy `env.template` to `.env` and fill in credentials (Perplexity,
+   ClickUp, Google Sheets — Robinhood is accessed via the connected MCP
+   server, not an API key)
 2. Open this repo in Claude Code
 3. Run `/portfolio` to verify API connectivity
 
 ## Architecture
 
 - **Claude is the bot** — each scheduled run is a fresh LLM invocation
-- **Git is memory** — all state lives in `memory/` committed to main
-- **Scripts are the only API path** — never curl Alpaca/Perplexity directly
+- **Google Sheets is memory** — TRADE-LOG/RESEARCH-LOG tabs are the source
+  of truth; `memory/*.md` is a best-effort local mirror (git push is
+  unreliable)
+- **Robinhood MCP + scripts are the only API path** — trade via
+  `mcp__Robinhood__*` tools, research/notify via the wrapper scripts, never
+  curl Perplexity/ClickUp directly, never use Alpaca
 
 ## Five Daily Workflows (America/Chicago)
 

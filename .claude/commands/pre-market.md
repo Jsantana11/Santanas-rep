@@ -2,7 +2,9 @@
 description: Run the pre-market research workflow manually (local mode, uses .env)
 ---
 
-Run the pre-market research workflow. Credentials come from .env.
+Run the pre-market research workflow. Broker is Robinhood via
+mcp__Robinhood__* tools (agentic account 504461419) — never use
+scripts/alpaca.sh. Perplexity credentials come from .env.
 
 DATE=$(date +%Y-%m-%d)
 
@@ -12,9 +14,9 @@ STEP 1 — Read memory for context:
 - tail of memory/RESEARCH-LOG.md
 
 STEP 2 — Pull live account state:
-  bash scripts/alpaca.sh account
-  bash scripts/alpaca.sh positions
-  bash scripts/alpaca.sh orders
+  mcp__Robinhood__get_portfolio (account: 504461419)
+  mcp__Robinhood__get_equity_positions (account: 504461419)
+  mcp__Robinhood__get_equity_orders (account: 504461419)
 
 STEP 3 — Research market context via Perplexity:
 - "WTI and Brent oil price right now"

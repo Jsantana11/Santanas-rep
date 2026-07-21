@@ -2,8 +2,8 @@
 
 ## Overview
 - What: Autonomous trading bot challenge
-- Starting capital: ~$10,000
-- Platform: Alpaca
+- Starting capital: ~$40, growing via ~$50 deposits every 2 weeks
+- Platform: Robinhood (agentic account 504461419)
 - Duration: [your challenge window]
 - Strategy: Swing trading stocks, no options
 
