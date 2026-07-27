@@ -11,3 +11,6 @@ No positions yet. Bot launches with $40 starting capital on Robinhood.
 
 ## 2026-06-29 — GE buy
 **Symbol:** GE | **Side:** buy | **Dollar Amount:** $8.00 | **Fill Price:** $372.9999 | **Quantity:** 0.021447 shares | **Placed by:** agentic
+
+## 2026-07-27 — AMD sell (midday -7% cut, mirror gap: several trades between 06-29 and today not recorded here — Sheets is authoritative)
+**Symbol:** AMD | **Side:** sell | **Quantity:** 0.026250 shares | **Avg Cost:** $523.81 | **Fill Price:** $481.0244 | **Unrealized P&L at cut:** -8.25% | **Reason:** breached -7% hard stop | **Placed by:** agentic
