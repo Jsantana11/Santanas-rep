@@ -11,3 +11,8 @@ No positions yet. Bot launches with $40 starting capital on Robinhood.
 
 ## 2026-06-29 — GE buy
 **Symbol:** GE | **Side:** buy | **Dollar Amount:** $8.00 | **Fill Price:** $372.9999 | **Quantity:** 0.021447 shares | **Placed by:** agentic
+
+NOTE: local mirror stale past this point — see Google Sheets TRADE-LOG tab (source of truth) for all activity since. Latest: BA + PFE buys 2026-08-05.
+
+## 2026-08-05 — Midday scan
+No cuts, no stop tightening, no thesis breaks. GM +3.74%, MMM +2.77%, F -4.23%, BA +0.24%, PFE -0.18% (all vs avg cost). Positions 5/6. Trades this wk 3/3 (cap reached). No action taken.
